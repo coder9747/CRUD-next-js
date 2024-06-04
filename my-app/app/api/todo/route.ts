@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import ToDoModel from "@/model/ToDo";
 import connectToDatabase from "@/lib/db";
-import { Tomorrow } from "next/font/google";
 
 export async function POST(req: Request) {
     try {
@@ -26,4 +25,16 @@ export async function GET() {
         console.log(error.message);
     }
 
+}
+
+export async function DELETE(req: Request) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const param = searchParams.get('id');
+        await ToDoModel.findByIdAndDelete(param);
+        return NextResponse.json({ succes: true, message: "Deleted Succesful" });
+
+    } catch (error) {
+        return NextResponse.json({ succes: true, message: "Deleted Succesful" });
+    }
 }

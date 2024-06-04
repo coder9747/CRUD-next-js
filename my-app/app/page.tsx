@@ -1,11 +1,12 @@
 import InputComponent from '@/Components/InputComponent'
 import React from 'react'
 import Link from 'next/link';
+import Buttons from '@/Components/Buttons';
 
 
 const getAllToDo = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/todo", { cache: "no-store" });
+    const response = await fetch("http://localhost:3000/api/todo", { cache: "no-cache" });
     const { data } = await response.json();
     return data;
   } catch (error) {
@@ -18,19 +19,22 @@ const getAllToDo = async () => {
 const page = async () => {
   const allData = await getAllToDo();
 
+  function handleDelete() {
+    console.log('clicked');
+  }
+
 
   return (
     <div>
       <InputComponent />
-      {allData.map((item: { title: string, description: string }) => {
+      {allData.map((item: { title: string, description: string, _id: string }) => {
         return <div className='flex flex-col bg-green-300 my-2 p-2 '>
           <div>
             <h1>{item.title}</h1>
             <p>{item.description}</p>
           </div>
           <div className='flex justify-around'>
-            <Link href={'/'}>Del </Link>
-            <Link href={'/'}>Update</Link>
+            <Buttons id={item._id} />
           </div>
 
         </div>

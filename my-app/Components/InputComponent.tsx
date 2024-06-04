@@ -17,7 +17,6 @@ const InputComponent = () => {
     const router = useRouter();
 
     const handleChange = async (e: any) => {
-        console.log(e);
         setInfo({ ...info, [e.target.name]: e.target.value });
     }
     const handleClick = async (e: any) => {
