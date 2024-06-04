@@ -27,7 +27,7 @@ const page = async () => {
   return (
     <div>
       <InputComponent />
-      {allData.map((item: { title: string, description: string, _id: string }) => {
+      {allData && allData.map((item: { title: string, description: string, _id: string }) => {
         return <div className='flex flex-col bg-green-300 my-2 p-2 '>
           <div>
             <h1>{item.title}</h1>

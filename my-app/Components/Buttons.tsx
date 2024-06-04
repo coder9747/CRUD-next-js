@@ -24,7 +24,7 @@ const Buttons = ({ id }: { id: string }) => {
     return (
         <div className="flex justify-around  w-full">
             <button onClick={handleDelete}>Del</button>
-            <button onClick={handleUpdate}>Update</button>
+            <button onClick={()=>router.push(`/update/${id}`)}>Update</button>
         </div>
     )
 }
