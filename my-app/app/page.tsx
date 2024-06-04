@@ -1,29 +1,25 @@
 import InputComponent from '@/Components/InputComponent'
 import React from 'react'
-import Link from 'next/link';
+
 import Buttons from '@/Components/Buttons';
+
+
 
 
 const getAllToDo = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/todo", { cache: "no-cache" });
+    console.log('run');
+    const response = await fetch("http://localhost:3000/api/todo", { cache: 'no-store' });
     const { data } = await response.json();
     return data;
   } catch (error) {
     console.log(error);
-    console.log('error');
     return null;
   }
 }
 
 const page = async () => {
   const allData = await getAllToDo();
-
-  function handleDelete() {
-    console.log('clicked');
-  }
-
-
   return (
     <div>
       <InputComponent />

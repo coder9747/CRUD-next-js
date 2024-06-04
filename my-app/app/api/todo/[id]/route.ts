@@ -29,7 +29,8 @@ export async function PUT(req: Request, { params }) {
         const { newTitle: title, newDescription: description } = await req.json();
         try {
             await connectToDatabase();
-            await ToDoModel.findByIdAndUpdate(id, { title, description });
+            const data = await ToDoModel.findByIdAndUpdate(id, { title, description });
+            console.log(data);
             return NextResponse.json({ succes: true, message: "Updated Succesful" });
         } catch (error) {
             console.log(error);
@@ -37,7 +38,7 @@ export async function PUT(req: Request, { params }) {
         }
     }
     else {
-        return NextResponse.json({succes:true,message:"Id is not Vaild"});
+        return NextResponse.json({ succes: true, message: "Id is not Vaild" });
     }
 
 }

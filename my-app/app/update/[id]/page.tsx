@@ -18,33 +18,28 @@ const page = ({ params }) => {
     });
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:3000/api/todo/${id}`);
+            const response = await fetch(`http://localhost:3000/api/todo/${id}`,{cache:"no-cache"});
             const { data } = await response.json();
-
-
             setInfo({ title: data.title, description: data.description });
         }
         fetchData();
     }, []);
     function handleChange(e: any) {
         setInfo({ ...info, [e.target.name]: e.target.value });
-
-    }
+    };
     async function handleClick() {
         const response = await fetch(`http://localhost:3000/api/todo/${id}`, {
             method: "PUT",
             headers:{
                 "Content-Type":"application/json",
             },
-            body:JSON.stringify(info),
+            body:JSON.stringify({newTitle:info.title,newDescription:info.description}),
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            const val = router.refresh();
             router.push('/');
         }
-
-
     }
     return (
         <div className='flex flex-col px-10 gap-1 h-28 my-2'>
